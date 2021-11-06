@@ -10,6 +10,10 @@
     />
     <link rel="stylesheet" href="css/normalize.css" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/validate.css" />
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js" defer></script>
+    <script src="js/jquery.validate.min.js" defer></script>
 
     <script src="js/main.js" defer></script>
   </head>
@@ -323,16 +327,28 @@
     <div class="modal-auth">
       <div class="modal-dialog modal-dialog-auth">
         <button class="close-auth">&times;</button>
-        <form id="logInForm">
+        <form id="logInForm" class="modal-auth__form validate-form">
           <fieldset class="modal-body">
             <legend class="modal-title">Авторизация</legend>
             <label class="label-auth">
               <span>Логин</span>
-              <input id="login" type="text" />
+              <input
+                id="login"
+                type="text"
+                class=".modal-auth__input"
+                required
+                name="login"
+              />
             </label>
             <label class="label-auth">
               <span>Пароль</span>
-              <input id="password" type="password" />
+              <input
+                id="password"
+                type="password"
+                class=".modal-auth__input"
+                required
+                name="pass"
+              />
             </label>
           </fieldset>
           <!-- /.modal-body -->

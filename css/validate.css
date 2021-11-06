@@ -1,0 +1,32 @@
+.modal-auth__form {
+}
+
+.label-auth {
+  position: relative;
+}
+.modal-auth__input,
+.modal-auth__input:focus {
+  outline: none;
+}
+
+.modal-auth__input ~ .invalid {
+  border-bottom: 1px solid red;
+}
+
+.invalid {
+  color: red;
+  /* border-bottom: 1px solid red; */
+}
+
+#login-error {
+  font-size: 13px;
+  position: absolute;
+  right: 0;
+  bottom: -16px;
+}
+#password-error {
+  font-size: 13px;
+  position: absolute;
+  right: 0;
+  bottom: -16px;
+}

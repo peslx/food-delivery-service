@@ -9,6 +9,35 @@ const logInForm = document.querySelector("#logInForm");
 const inputLogin = document.querySelector("#login");
 const inputPass = document.querySelector("#password");
 
+const address = document.querySelector(".input-address");
+
+// Только буквы и цифры: /[^a-zA-Zа-яА-Я0-9]/
+// Только буквы, цифры и '_' (например для логина): /[^a-zA-Zа-яА-Я0-9_]/
+// Только буквы, цифры и символы (например для пароля): '!@#$% &?-_=+': /[^a-zA-Zа-яА-Я0-9\!\@\#\$\% \&\?\-_=\+]/
+// Только буквы, цифры, '.,' и пробел (например для почтового адреса): /[^a-zA-Zа-яА-Я0-9 .,]/
+
+const regExp = {
+  login: /[^a-zA-Zа-яА-Я0-9_]/,
+  password: /[^a-zA-Zа-яА-Я0-9\!\@\#\$\% \&\?\-_=\+]/,
+  address: /[^a-zA-Zа-яА-Я0-9 .,]/,
+};
+
+validate(address, regExp.address);
+
+function validate(input, regex) {
+  input.oninput = function () {
+    this.value = this.value.replace(regex, "");
+  };
+}
+
+// address.oninput = function () {
+//   // address.addEventListener("keypress", (e) => {
+//   //   console.log(e.keyCode);
+//   //   console.log(String.fromCharCode(e.keyCode));
+//   // });
+//   this.value = this.value.replace(regexp.address, "");
+// };
+
 btnAuth.addEventListener("click", () => {
   modalAuth.style.display = "flex";
 });
@@ -32,7 +61,9 @@ logInForm.addEventListener("submit", (e) => {
     login: inputLogin.value,
     password: inputPass.value,
   };
-  user.login.trim();
+
+  // login(user);
+
   if (user.login != "" && !/^\s|\s$/.test(user.login)) {
     login(user);
   } else if (/^\s|\s$/.test(user.login)) {
@@ -47,14 +78,11 @@ logInForm.addEventListener("submit", (e) => {
 });
 
 const login = (user) => {
-  // console.log();
-
   btnAuth.style.display = "none";
   btnOut.style.display = "flex";
   userName.textContent = user.login;
   userName.style.display = "flex";
   closeModalAuth();
-  // console.log(user);
 };
 
 const logout = () => {
@@ -66,8 +94,6 @@ const logout = () => {
 };
 
 if (localStorage.getItem("user")) {
-  // console.log(localStorage.getItem("user"));
-  // console.log(JSON.parse(localStorage.getItem("user")));
   login(JSON.parse(localStorage.getItem("user")));
 }
 
