@@ -23,20 +23,14 @@ const regExp = {
 };
 
 validate(address, regExp.address);
+validate(inputLogin, regExp.login);
+validate(inputPass, regExp.password);
 
 function validate(input, regex) {
   input.oninput = function () {
     this.value = this.value.replace(regex, "");
   };
 }
-
-// address.oninput = function () {
-//   // address.addEventListener("keypress", (e) => {
-//   //   console.log(e.keyCode);
-//   //   console.log(String.fromCharCode(e.keyCode));
-//   // });
-//   this.value = this.value.replace(regexp.address, "");
-// };
 
 btnAuth.addEventListener("click", () => {
   modalAuth.style.display = "flex";
@@ -56,13 +50,10 @@ function closeModalAuth() {
 
 logInForm.addEventListener("submit", (e) => {
   e.preventDefault();
-
   const user = {
     login: inputLogin.value,
     password: inputPass.value,
   };
-
-  // login(user);
 
   if (user.login != "" && !/^\s|\s$/.test(user.login)) {
     login(user);
@@ -96,7 +87,3 @@ const logout = () => {
 if (localStorage.getItem("user")) {
   login(JSON.parse(localStorage.getItem("user")));
 }
-
-String.prototype.trim = function () {
-  return this.replace(/^\s+|\s+$/g, "");
-};
