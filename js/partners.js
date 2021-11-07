@@ -6,8 +6,6 @@ function renderRestaurants(cards) {
   cards.forEach((item) => {
     const { products, image, name, time_of_delivery, stars, price, kitchen } =
       item;
-    console.log(item);
-
     const a = document.createElement("a");
     a.setAttribute("href", url + "/restaurant.html");
     a.classList.add("card", "card-restaurant");
