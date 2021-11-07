@@ -6,17 +6,16 @@ const restaurantPrice = document.querySelector(".price");
 const restaurantCategory = document.querySelector(".category");
 
 if (localStorage.getItem("restaurant")) {
-  fetch(`./db/${localStorage.getItem("restaurant")}`)
+  const restaurant = JSON.parse(localStorage.getItem("restaurant"));
+  fetch(`./db/${restaurant.products}`)
     .then((response) => response.json())
     .then((data) => renderCards(data))
     .catch((error) => console.log(error));
-  restaurantTitle.textContent = localStorage.getItem("restaurant-title");
-  restaurantRating.textContent = localStorage.getItem("restaurant-stars");
-  restaurantPrice.textContent = `От ${localStorage.getItem(
-    "restaurant-price"
-  )} ₽`;
-  restaurantCategory.textContent = localStorage.getItem("restaurant-category");
-  console.log(localStorage.getItem("restaurant"));
+
+  restaurantTitle.textContent = restaurant.name;
+  restaurantRating.textContent = restaurant.stars;
+  restaurantPrice.textContent = `От ${restaurant.price} ₽`;
+  restaurantCategory.textContent = restaurant.kitchen;
 } else {
   window.location.href = "/";
 }
@@ -24,8 +23,6 @@ if (localStorage.getItem("restaurant")) {
 // JSON - обработчик
 function renderCards(cards) {
   cards.forEach(({ image, name, description, price }) => {
-    // console.log({ image, name, description, price });
-
     const card = document.createElement("div");
     card.classList.add("card");
 
@@ -47,7 +44,6 @@ function renderCards(cards) {
       </div>
     </div>
   `;
-    // console.log(card);
     menu.append(card);
   });
 }
