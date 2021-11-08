@@ -11,7 +11,7 @@ if (localStorage.getItem("restaurant")) {
     .then((response) => response.json())
     .then((data) => renderCards(data))
     .catch((error) => console.log(error));
-
+  document.title = restaurant.name;
   restaurantTitle.textContent = restaurant.name;
   restaurantRating.textContent = restaurant.stars;
   restaurantPrice.textContent = `От ${restaurant.price} ₽`;
